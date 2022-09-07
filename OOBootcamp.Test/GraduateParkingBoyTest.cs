@@ -6,6 +6,7 @@ namespace OOBootcamp.Test;
 
 public class GraduateParkingBoyTest
 {
+    // Given 3 avaliable parkinglots, When a can parks, Then park in Parkinglot A
     [Test]
     public void should_park_in_A_parkinglot_when_all_parkinglots_avaliable()
     {
@@ -24,4 +25,33 @@ public class GraduateParkingBoyTest
         Assert.That(parkingLots["A"]._availableSpace, Is.EqualTo(9));
     }
     
+    // Given 3  avaliable parkinglots and last car parked in A, When a car parks, Then park in B
+    [Test]
+    public void should_park_in_B_parkinglot_when_all_parkinglots_avaliable_and_last_parking_in_A_parkinglots()
+    {
+        var parkingLots = new Dictionary<string, ParkingLot>
+        {
+            {"A", new ParkingLot(10, 2, "A")},
+            {"B", new ParkingLot(10, 2, "B")},
+            {"C", new ParkingLot(10, 2, "C")}
+        };
+
+        var boy = new GraduateParkingBoy(parkingLots);
+        var car1 = new Vehicle("111111");
+        var car2 = new Vehicle("222222");
+
+        boy.Park(car1);
+        boy.Park(car2);
+        
+        Assert.That(parkingLots["A"]._availableSpace, Is.EqualTo(9));
+        Assert.That(parkingLots["B"]._availableSpace, Is.EqualTo(9));
+    }
+
+    // Given A(avaliable), B(avaliable), C(full) parkinglots and last car parked in 2, When a car parks, Then park in A
+    
+    // Given 3 full parkinglots, Then a car parks, Then throw exception
+    
+    // Given 3 parkinglots, When a car leaves from A, Then A has one more space
+    
+    // Given 3 parkinglots, When a external car leaves, Then throw exception
 }
