@@ -8,13 +8,13 @@ public class GraduateParkingBoyTest
 {
     // Given 3 avaliable parkinglots, When a can parks, Then park in Parkinglot A
     [Test]
-    public void should_park_in_A_parkinglot_when_all_parkinglots_avaliable()
+    public void should_park_in_1_parkinglot_when_all_parkinglots_avaliable()
     {
-        var parkingLots = new Dictionary<string, ParkingLot>
+        var parkingLots = new Dictionary<int, ParkingLot>
         {
-            {"A", new ParkingLot(10, 2, "A")},
-            {"B", new ParkingLot(10, 2, "B")},
-            {"C", new ParkingLot(10, 2, "C")}
+            {1, new ParkingLot(10, 2, "A")},
+            {2, new ParkingLot(10, 2, "B")},
+            {3, new ParkingLot(10, 2, "C")}
         };
 
         var boy = new GraduateParkingBoy(parkingLots);
@@ -22,18 +22,18 @@ public class GraduateParkingBoyTest
 
         boy.Park(car);
         
-        Assert.That(parkingLots["A"]._availableSpace, Is.EqualTo(9));
+        Assert.That(parkingLots[1].AvailableCount, Is.EqualTo(9));
     }
     
     // Given 3  avaliable parkinglots and last car parked in A, When a car parks, Then park in B
     [Test]
-    public void should_park_in_B_parkinglot_when_all_parkinglots_avaliable_and_last_parking_in_A_parkinglots()
+    public void should_park_in_B_parkinglot_when_all_parkinglots_avaliable_and_last_parking_in_1_parkinglots()
     {
-        var parkingLots = new Dictionary<string, ParkingLot>
+        var parkingLots = new Dictionary<int, ParkingLot>
         {
-            {"A", new ParkingLot(10, 2, "A")},
-            {"B", new ParkingLot(10, 2, "B")},
-            {"C", new ParkingLot(10, 2, "C")}
+            {1, new ParkingLot(10, 2, "A")},
+            {2, new ParkingLot(10, 2, "B")},
+            {3, new ParkingLot(10, 2, "C")}
         };
 
         var boy = new GraduateParkingBoy(parkingLots);
@@ -43,8 +43,8 @@ public class GraduateParkingBoyTest
         boy.Park(car1);
         boy.Park(car2);
         
-        Assert.That(parkingLots["A"]._availableSpace, Is.EqualTo(9));
-        Assert.That(parkingLots["B"]._availableSpace, Is.EqualTo(9));
+        Assert.That(parkingLots[1].AvailableCount, Is.EqualTo(9));
+        Assert.That(parkingLots[2].AvailableCount, Is.EqualTo(9));
     }
 
     // Given A(avaliable), B(avaliable), C(full) parkinglots and last car parked in 2, When a car parks, Then park in A

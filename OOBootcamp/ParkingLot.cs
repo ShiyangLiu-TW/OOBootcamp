@@ -6,15 +6,17 @@ public class ParkingLot
     public double HourlyRate { get; }
     public int AvailableCount { get; private set; }
     public int MaxCapacity { get; }
+    public bool IsLastParked { get; set; }
     private readonly Dictionary<Vehicle, DateTime> _parkedVehicles;
 
-    public ParkingLot(int maxCapacity, double hourlyRate, string name)
+    public ParkingLot(int maxCapacity, double hourlyRate, string name,bool isLastParked = false)
     {
         MaxCapacity = maxCapacity;
         Name = name;
         HourlyRate = hourlyRate;
         AvailableCount = maxCapacity;
         _parkedVehicles = new Dictionary<Vehicle, DateTime>();
+        IsLastParked = isLastParked;
     }
     
     public bool ParkVehicle(Vehicle vehicle)
@@ -23,6 +25,7 @@ public class ParkingLot
         {
             _parkedVehicles.Add(vehicle, DateTime.UtcNow);
             AvailableCount--;
+            IsLastParked = true;
             return true;
         }
 
