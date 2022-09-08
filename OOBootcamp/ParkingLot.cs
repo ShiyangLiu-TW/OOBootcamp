@@ -4,7 +4,7 @@ public class ParkingLot
 {
     public string Name { get; }
     public double HourlyRate { get; }
-    public int AvailableCount { get; private set; }
+    public int AvailableCount { get; set; }
     public int MaxCapacity { get; }
     public bool IsLastParked { get; set; }
     private readonly Dictionary<Vehicle, DateTime> _parkedVehicles;

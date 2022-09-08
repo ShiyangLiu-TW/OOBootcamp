@@ -36,6 +36,8 @@ public class GraduateParkingBoyTest
             {new(10, 2, "C")}
         };
 
+        parkingLots[0].AvailableCount = 9;
+
         var boy = new GraduateParkingBoy(parkingLots, parkingLots[0]);
         var car = new Vehicle("111111");
 
