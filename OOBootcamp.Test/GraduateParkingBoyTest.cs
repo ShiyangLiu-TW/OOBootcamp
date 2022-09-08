@@ -10,14 +10,14 @@ public class GraduateParkingBoyTest
     [Test]
     public void should_park_in_1_parkinglot_when_all_parkinglots_avaliable()
     {
-        var parkingLots = new Dictionary<int, ParkingLot>
+        var parkingLots = new List<ParkingLot>
         {
-            {1, new ParkingLot(10, 2, "A")},
-            {2, new ParkingLot(10, 2, "B")},
-            {3, new ParkingLot(10, 2, "C")}
+            {new(10, 2, "A")},
+            {new(10, 2, "B")},
+            {new(10, 2, "C")}
         };
 
-        var boy = new GraduateParkingBoy(parkingLots);
+        var boy = new GraduateParkingBoy(parkingLots,null);
         var car = new Vehicle("111111");
 
         boy.Park(car);
@@ -29,14 +29,14 @@ public class GraduateParkingBoyTest
     [Test]
     public void should_park_in_B_parkinglot_when_all_parkinglots_avaliable_and_last_parking_in_1_parkinglots()
     {
-        var parkingLots = new Dictionary<int, ParkingLot>
+        var parkingLots = new List<ParkingLot>
         {
-            {1, new ParkingLot(10, 2, "A")},
-            {2, new ParkingLot(10, 2, "B")},
-            {3, new ParkingLot(10, 2, "C")}
+            {new(10, 2, "A")},
+            {new(10, 2, "B")},
+            {new(10, 2, "C")}
         };
 
-        var boy = new GraduateParkingBoy(parkingLots);
+        var boy = new GraduateParkingBoy(parkingLots, parkingLots[0]);
         var car1 = new Vehicle("111111");
         var car2 = new Vehicle("222222");
 
