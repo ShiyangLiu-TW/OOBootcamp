@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -70,6 +71,26 @@ public class GraduateParkingBoyTest
     }
 
     // Given 3 full parkinglots, Then a car parks, Then throw exception
+    [Test]
+    public void should_throw_exception_when_all_parkinglots_are_full()
+    {
+        var parkingLots = new List<ParkingLot>
+        {
+            {new(10, 2, "A")},
+            {new(10, 2, "B")},
+            {new(10, 2, "C")}
+        };
+
+        parkingLots[0].AvailableCount = 0;
+        parkingLots[1].AvailableCount = 0;
+        parkingLots[2].AvailableCount = 0;
+
+        var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
+        var car = new Vehicle("111111");
+        
+        Assert.Throws<Exception>(() => boy.Park(car));
+    }
+
     
     // Given 3 parkinglots, When a car leaves from A, Then A has one more space
     
