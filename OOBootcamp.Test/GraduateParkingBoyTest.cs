@@ -108,6 +108,7 @@ public class GraduateParkingBoyTest
 
         var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
         var car = new Vehicle("111111");
+        parkingLots[0]._parkedVehicles.Add(car,DateTime.UtcNow);
 
         boy.PullOut(car,parkingLots[0]);
         

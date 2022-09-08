@@ -7,7 +7,7 @@ public class ParkingLot
     public int AvailableCount { get; set; }
     public int MaxCapacity { get; }
     public bool IsLastParked { get; set; }
-    private readonly Dictionary<Vehicle, DateTime> _parkedVehicles;
+    public Dictionary<Vehicle, DateTime> _parkedVehicles;
 
     public ParkingLot(int maxCapacity, double hourlyRate, string name,bool isLastParked = false)
     {
