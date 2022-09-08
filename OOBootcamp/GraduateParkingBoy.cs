@@ -35,4 +35,14 @@ public class GraduateParkingBoy
 
         throw new Exception("No Parkinglot Available!");
     }
+
+    public void PullOut(Vehicle car, ParkingLot parkingLot)
+    {
+        if (!parkingLot.HasVehicle(car))
+        {
+            throw new Exception($"Cannot find car: {car.LicensePlate}");
+        }
+
+        parkingLot.AvailableCount++;
+    }
 }
