@@ -22,7 +22,7 @@ public class GraduateParkingBoyTest
 
         boy.Park(car);
         
-        Assert.That(parkingLots[1].AvailableCount, Is.EqualTo(9));
+        Assert.That(parkingLots[0].AvailableCount, Is.EqualTo(9));
     }
     
     // Given 3  avaliable parkinglots and last car parked in A, When a car parks, Then park in B
