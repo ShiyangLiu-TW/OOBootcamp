@@ -48,7 +48,26 @@ public class GraduateParkingBoyTest
     }
 
     // Given A(avaliable), B(avaliable), C(full) parkinglots and last car parked in 2, When a car parks, Then park in A
-    
+    [Test]
+    public void should_park_in_A_parkinglot_when_C_parkinglot_is_full_and_last_parking_in_B_parkinglots()
+    {
+        var parkingLots = new List<ParkingLot>
+        {
+            {new(10, 2, "A")},
+            {new(10, 2, "B")},
+            {new(10, 2, "C")}
+        };
+
+        parkingLots[2].AvailableCount = 0;
+
+        var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
+        var car = new Vehicle("111111");
+
+        boy.Park(car);
+        
+        Assert.That(parkingLots[0].AvailableCount, Is.EqualTo(9));
+    }
+
     // Given 3 full parkinglots, Then a car parks, Then throw exception
     
     // Given 3 parkinglots, When a car leaves from A, Then A has one more space
