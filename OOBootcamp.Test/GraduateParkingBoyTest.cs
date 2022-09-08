@@ -7,20 +7,26 @@ namespace OOBootcamp.Test;
 
 public class GraduateParkingBoyTest
 {
-    // Given 3 avaliable parkinglots, When a can parks, Then park in Parkinglot A
-    [Test]
-    public void should_park_in_A_parkinglot_when_all_parkinglots_avaliable()
+    private List<ParkingLot> parkingLots;
+    private Vehicle car;
+    [SetUp]
+    public void Setup()
     {
-        var parkingLots = new List<ParkingLot>
+        parkingLots = new List<ParkingLot>
         {
             {new(10, 2, "A")},
             {new(10, 2, "B")},
             {new(10, 2, "C")}
         };
+        car = new Vehicle("111111");
+    }
 
+    // Given 3 avaliable parkinglots, When a can parks, Then park in Parkinglot A
+    [Test]
+    public void should_park_in_A_parkinglot_when_all_parkinglots_avaliable()
+    {
         var boy = new GraduateParkingBoy(parkingLots,null);
-        var car = new Vehicle("111111");
-
+        
         boy.Park(car);
         
         Assert.That(parkingLots[0].AvailableCount, Is.EqualTo(9));
@@ -30,17 +36,9 @@ public class GraduateParkingBoyTest
     [Test]
     public void should_park_in_B_parkinglot_when_all_parkinglots_avaliable_and_last_parking_in_A_parkinglots()
     {
-        var parkingLots = new List<ParkingLot>
-        {
-            {new(10, 2, "A")},
-            {new(10, 2, "B")},
-            {new(10, 2, "C")}
-        };
-
         parkingLots[0].AvailableCount = 9;
 
         var boy = new GraduateParkingBoy(parkingLots, parkingLots[0]);
-        var car = new Vehicle("111111");
 
         boy.Park(car);
         
@@ -52,18 +50,10 @@ public class GraduateParkingBoyTest
     [Test]
     public void should_park_in_A_parkinglot_when_C_parkinglot_is_full_and_last_parking_in_B_parkinglots()
     {
-        var parkingLots = new List<ParkingLot>
-        {
-            {new(10, 2, "A")},
-            {new(10, 2, "B")},
-            {new(10, 2, "C")}
-        };
-
         parkingLots[1].AvailableCount = 9;
         parkingLots[2].AvailableCount = 0;
 
         var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
-        var car = new Vehicle("111111");
 
         boy.Park(car);
         
@@ -74,19 +64,11 @@ public class GraduateParkingBoyTest
     [Test]
     public void should_throw_exception_when_all_parkinglots_are_full()
     {
-        var parkingLots = new List<ParkingLot>
-        {
-            {new(10, 2, "A")},
-            {new(10, 2, "B")},
-            {new(10, 2, "C")}
-        };
-
         parkingLots[0].AvailableCount = 0;
         parkingLots[1].AvailableCount = 0;
         parkingLots[2].AvailableCount = 0;
 
         var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
-        var car = new Vehicle("111111");
         
         Assert.Throws<Exception>(() => boy.Park(car));
     }
@@ -95,19 +77,11 @@ public class GraduateParkingBoyTest
     [Test]
     public void should_has_one_more_availablecount_when_one_car_leaves_parkinglot_A()
     {
-        var parkingLots = new List<ParkingLot>
-        {
-            {new(10, 2, "A")},
-            {new(10, 2, "B")},
-            {new(10, 2, "C")}
-        };
-
         parkingLots[0].AvailableCount = 0;
         parkingLots[1].AvailableCount = 0;
         parkingLots[2].AvailableCount = 0;
 
         var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
-        var car = new Vehicle("111111");
         parkingLots[0]._parkedVehicles.Add(car,DateTime.UtcNow);
 
         boy.PullOut(car,parkingLots[0]);
@@ -119,19 +93,11 @@ public class GraduateParkingBoyTest
     [Test]
     public void should_throw_ecxption_when_external_car_leaves_parkinglot_A()
     {
-        var parkingLots = new List<ParkingLot>
-        {
-            {new(10, 2, "A")},
-            {new(10, 2, "B")},
-            {new(10, 2, "C")}
-        };
-
         parkingLots[0].AvailableCount = 0;
         parkingLots[1].AvailableCount = 0;
         parkingLots[2].AvailableCount = 0;
 
         var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
-        var car = new Vehicle("111111");
         
         Assert.Throws<Exception>(() => boy.PullOut(car,parkingLots[0]));
     }
