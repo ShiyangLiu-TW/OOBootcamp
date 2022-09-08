@@ -58,6 +58,7 @@ public class GraduateParkingBoyTest
             {new(10, 2, "C")}
         };
 
+        parkingLots[1].AvailableCount = 9;
         parkingLots[2].AvailableCount = 0;
 
         var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
