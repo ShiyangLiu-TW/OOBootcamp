@@ -1,4 +1,6 @@
 
+using System.Net.Sockets;
+
 namespace OOBootcamp;
 
 public class GraduateParkingBoy
@@ -14,8 +16,23 @@ public class GraduateParkingBoy
 
     public void Park(Vehicle car)
     {
-        var indexOfLastParkingLot = _parkingLots.IndexOf(_lastParkingLot);
-        var indexOfNextParkingLot = indexOfLastParkingLot + 1;
+        var indexOfNextParkingLot = GetNextParkingLot(_lastParkingLot);
         _parkingLots[indexOfNextParkingLot].ParkVehicle(car);
+    }
+
+    private int GetNextParkingLot(ParkingLot lastParkingLot)
+    {
+        var count = _parkingLots.Count;
+        var point = _parkingLots.IndexOf(_lastParkingLot);
+        for (int i = 0; i < count; i++)
+        {
+            point++;
+            if (_parkingLots[point % count].AvailableCount != 0)
+            {
+                return point % count;
+            }
+        }
+
+        throw new Exception("No Parkinglot Available!");
     }
 }
