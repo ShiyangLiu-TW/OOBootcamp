@@ -8,7 +8,7 @@ public class GraduateParkingBoyTest
 {
     // Given 3 avaliable parkinglots, When a can parks, Then park in Parkinglot A
     [Test]
-    public void should_park_in_1_parkinglot_when_all_parkinglots_avaliable()
+    public void should_park_in_A_parkinglot_when_all_parkinglots_avaliable()
     {
         var parkingLots = new List<ParkingLot>
         {
@@ -27,7 +27,7 @@ public class GraduateParkingBoyTest
     
     // Given 3  avaliable parkinglots and last car parked in A, When a car parks, Then park in B
     [Test]
-    public void should_park_in_2_parkinglot_when_all_parkinglots_avaliable_and_last_parking_in_1_parkinglots()
+    public void should_park_in_B_parkinglot_when_all_parkinglots_avaliable_and_last_parking_in_A_parkinglots()
     {
         var parkingLots = new List<ParkingLot>
         {
