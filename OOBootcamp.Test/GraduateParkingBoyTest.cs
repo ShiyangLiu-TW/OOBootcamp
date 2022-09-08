@@ -115,4 +115,24 @@ public class GraduateParkingBoyTest
     }
 
     // Given 3 parkinglots, When a external car leaves, Then throw exception
+    [Test]
+    public void should_throw_ecxption_when_external_car_leaves_parkinglot_A()
+    {
+        var parkingLots = new List<ParkingLot>
+        {
+            {new(10, 2, "A")},
+            {new(10, 2, "B")},
+            {new(10, 2, "C")}
+        };
+
+        parkingLots[0].AvailableCount = 0;
+        parkingLots[1].AvailableCount = 0;
+        parkingLots[2].AvailableCount = 0;
+
+        var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
+        var car = new Vehicle("111111");
+        
+        Assert.Throws<Exception>(() => boy.PullOut(car));
+    }
+
 }
