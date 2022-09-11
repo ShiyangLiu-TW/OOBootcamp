@@ -21,4 +21,17 @@ public class SmartParkingBoy
             throw new Exception("Parkinglot is not avaliable");
         }
     }
+
+    public void Pullout(Vehicle car)
+    {
+        try
+        {
+            var parkingLot = _parkingLots.Where(p => p.HasVehicle(car)).Single();
+            parkingLot.AvailableCount++;
+        }
+        catch (VehicleNotFoundException e)
+        {
+            throw new VehicleNotFoundException(car);
+        }
+    }
 }
