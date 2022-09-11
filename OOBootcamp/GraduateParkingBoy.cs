@@ -36,13 +36,16 @@ public class GraduateParkingBoy
         throw new Exception("No Parkinglot Available!");
     }
 
-    public void PullOut(Vehicle car, ParkingLot parkingLot)
+    public void PullOut(Vehicle car)
     {
-        if (!parkingLot.HasVehicle(car))
+        try
         {
-            throw new Exception($"Cannot find car: {car.LicensePlate}");
+            var parkingLot = _parkingLots.Where(p => p.HasVehicle(car)).Single();
+            parkingLot.AvailableCount++;
         }
-
-        parkingLot.AvailableCount++;
+        catch (Exception)
+        {
+            throw new Exception($"Cannot find car: {car.LicensePlate}.");
+        }
     }
 }

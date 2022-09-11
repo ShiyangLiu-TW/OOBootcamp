@@ -84,7 +84,7 @@ public class GraduateParkingBoyTest
         var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
         parkingLots[0]._parkedVehicles.Add(car,DateTime.UtcNow);
 
-        boy.PullOut(car,parkingLots[0]);
+        boy.PullOut(car);
         
         Assert.That(parkingLots[0].AvailableCount, Is.EqualTo(1));
     }
@@ -99,7 +99,7 @@ public class GraduateParkingBoyTest
 
         var boy = new GraduateParkingBoy(parkingLots, parkingLots[1]);
         
-        Assert.Throws<Exception>(() => boy.PullOut(car,parkingLots[0]));
+        Assert.Throws<Exception>(() => boy.PullOut(car));
     }
 
 }
