@@ -29,9 +29,9 @@ public class SmartParkingBoy
             var parkingLot = _parkingLots.Where(p => p.HasVehicle(car)).Single();
             parkingLot.AvailableCount++;
         }
-        catch (VehicleNotFoundException e)
+        catch (Exception)
         {
-            throw new VehicleNotFoundException(car);
+            throw new Exception($"Cannot find car: {car.LicensePlate}.");
         }
     }
 }

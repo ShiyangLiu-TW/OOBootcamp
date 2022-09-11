@@ -87,5 +87,22 @@ public class SmartParkingBoyTest
         
         Assert.That(parkingLots[0].AvailableCount, Is.EqualTo(10));
     }
+    
+    // Task1: Given "111111" is not in Parkinglot When pull out a car Then fail
+    [Test]
+    public void should_fail_when_pull_out_a_nonexisting_car()
+    {
+        parkingLots[0].AvailableCount = 10;
+        parkingLots[1].AvailableCount = 10;
+        parkingLots[2].AvailableCount = 10;
+        
+        var boy = new SmartParkingBoy(parkingLots);
+        var vehicleNotException = Assert.Throws<Exception>((() => boy.Pullout(car)));
+        
+        Assert.That(vehicleNotException.Message, Is.EqualTo("Cannot find car: 111111."));
+        Assert.That(parkingLots[0].AvailableCount, Is.EqualTo(10));
+        Assert.That(parkingLots[1].AvailableCount, Is.EqualTo(10));
+        Assert.That(parkingLots[2].AvailableCount, Is.EqualTo(10));
+    }
 
 }
