@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -50,6 +51,23 @@ public class SmartParkingBoyTest
         Assert.That(parkingLots[0].AvailableCount, Is.EqualTo(9));
         Assert.That(parkingLots[1].AvailableCount, Is.EqualTo(9));
         Assert.That(parkingLots[2].AvailableCount, Is.EqualTo(9));
+    }
+
+    // Task1: Given 3 full parkinglots When park a car Then throw exception
+    [Test]
+    public void should_thorw_an_exception_when_all_parkinglots_are_full()
+    {
+        parkingLots[0].AvailableCount = 0;
+        parkingLots[1].AvailableCount = 0;
+        parkingLots[2].AvailableCount = 0;
+        
+        var boy = new SmartParkingBoy(parkingLots);
+        var notAvaliabeException = Assert.Throws<Exception>((() => boy.Park(car)));
+        
+        Assert.That(notAvaliabeException.Message, Is.EqualTo("Parkinglot is not avaliable"));
+        Assert.That(parkingLots[0].AvailableCount, Is.EqualTo(0));
+        Assert.That(parkingLots[1].AvailableCount, Is.EqualTo(0));
+        Assert.That(parkingLots[2].AvailableCount, Is.EqualTo(0));
     }
 
 }

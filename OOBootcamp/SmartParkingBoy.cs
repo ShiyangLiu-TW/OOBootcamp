@@ -10,8 +10,15 @@ public class SmartParkingBoy
 
     public void Park(Vehicle car)
     {
-        var nextParkingLot = _parkingLots.Where(p => p.AvailableCount != 0)
-            .OrderByDescending(p => p.AvailableCount / p.MaxCapacity).First();
-        nextParkingLot.ParkVehicle(car);
+        try
+        {
+            var nextParkingLot = _parkingLots.Where(p => p.AvailableCount != 0)
+                .OrderByDescending(p => p.AvailableCount / p.MaxCapacity).First();
+            nextParkingLot.ParkVehicle(car);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Parkinglot is not avaliable");
+        }
     }
 }
